@@ -5,6 +5,7 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -65,6 +66,19 @@ public abstract class BaseTest {
         desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, APP_FULL_RESET);
         desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, APP_NO_RESET);
         desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+    }
+
+    protected void setDesiredCapabilitiesForAndroidWeb(DesiredCapabilities desiredCapabilities) {
+        String PLATFORM_NAME = PropertyUtils.getProperty("android.platform");
+        String PLATFORM_VERSION = PropertyUtils.getProperty("android.platform.version");
+        String DEVICE_NAME = PropertyUtils.getProperty("android.device.name");
+
+        desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, PLATFORM_NAME);
+        desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, PLATFORM_VERSION);
+        desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, BrowserType.CHROME);
+        desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_VERSION, "40.0.2214");
+        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
+        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiAutomator1");
     }
 
     public static WebDriver getScreenshotableWebDriver() {
