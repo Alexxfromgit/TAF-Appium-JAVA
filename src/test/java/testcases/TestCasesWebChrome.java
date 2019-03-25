@@ -27,5 +27,6 @@ public class TestCasesWebChrome extends BaseTest {
 
         FacebookMainPage facebookMainPage = new FacebookMainPage(driver);
         facebookMainPage.fillLoginForm();
+        Thread.sleep(6000);
     }
 }
