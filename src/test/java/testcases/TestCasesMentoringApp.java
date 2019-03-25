@@ -2,9 +2,7 @@ package testcases;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageobject.MentoringAppHomeScreen;
 
 import java.net.MalformedURLException;
@@ -20,13 +18,45 @@ public class TestCasesMentoringApp extends BaseTest {
         driver = new AppiumDriver<>(new URL(APPIUM_SERVER_URL), capabilities);
     }
 
-    @Test
-    public void test_application_first() throws InterruptedException {
-        Thread.sleep(6000);
-        MentoringAppHomeScreen mentoringAppHomeScreen = new MentoringAppHomeScreen(driver);
-        mentoringAppHomeScreen.inputTextToInputField();
-        mentoringAppHomeScreen.clickButtonPost();
-        Thread.sleep(6000);
+    @AfterMethod
+    public void cleanUp() throws MalformedURLException {
+        MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
+        appHomeScreen.getInputField().clear();
+        appHomeScreen.clickButtonPost();
     }
 
+    @Test(priority = 2)
+    public void test_application_first() throws InterruptedException {
+        MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
+        appHomeScreen.inputTextToInputField("test");
+        appHomeScreen.clickButtonPost();
+    }
+
+    @Test(priority = 1)
+    public void test_dropdown_section_items() throws InterruptedException {
+        MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
+
+        appHomeScreen.clickOnSectionDropDownMenu();
+        appHomeScreen.clickOnSectionItem(0);
+        appHomeScreen.checkOutputValue("1");
+        appHomeScreen.clickOnSectionDropDownMenu();
+        appHomeScreen.clickOnSectionItem(1);
+        appHomeScreen.checkOutputValue("0");
+        appHomeScreen.clickOnSectionDropDownMenu();
+        appHomeScreen.clickOnSectionItem(2);
+        appHomeScreen.checkOutputValue("3");
+    }
+
+    @Test(priority = 3)
+    public void test_checkbox_functionality() throws InterruptedException {
+        MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
+
+        appHomeScreen.inputTextToInputField("test");
+        appHomeScreen.clickButtonPost();
+        appHomeScreen.checkOutputValue("test");
+        appHomeScreen.inputTextToInputField("testing");
+        appHomeScreen.clickOnCheckboxRevert();
+        appHomeScreen.clickButtonPost();
+        appHomeScreen.checkOutputValue("gnitset");
+    }
 }
