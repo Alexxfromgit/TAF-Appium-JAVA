@@ -35,23 +35,23 @@ public class MentoringAppHomeScreen extends BasePO {
         return inputField;
     }
 
-    public void inputTextToInputField(String inputValue){
+    public void inputTextToInputField(String inputValue) {
         inputField.sendKeys(inputValue);
     }
 
-    public void clickButtonPost(){
+    public void clickButtonPost() {
         buttonPost.click();
     }
 
-    public void clickOnSectionDropDownMenu(){
+    public void clickOnSectionDropDownMenu() {
         dropDownSectionMenu.click();
     }
 
-    public void clickOnSectionItem(Integer itemNumber){
+    public void clickOnSectionItem(Integer itemNumber) {
         sectionElements.get(itemNumber).click();
     }
 
-    public void checkOutputValue(String expectedValue){
+    public void checkOutputValue(String expectedValue) {
         Assert.assertEquals(outputField.getText(), expectedValue);
     }
 

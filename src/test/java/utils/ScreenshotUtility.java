@@ -30,7 +30,7 @@ public class ScreenshotUtility implements ITestListener {
 
     }
 
-    public void onTestSuccess(ITestResult tr){
+    public void onTestSuccess(ITestResult tr) {
         captureScreenShot(tr, "pass");
     }
 

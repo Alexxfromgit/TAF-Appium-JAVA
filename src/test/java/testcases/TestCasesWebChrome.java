@@ -1,7 +1,6 @@
 package testcases;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

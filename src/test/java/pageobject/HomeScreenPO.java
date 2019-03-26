@@ -16,6 +16,4 @@ public class HomeScreenPO extends BasePO {
     public void tapOnLoginScreenTextView() {
         loginScreenTextView.click();
     }
-
-
 }

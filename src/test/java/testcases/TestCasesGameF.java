@@ -2,7 +2,6 @@ package testcases;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pageobject.HomeScreenPO;
@@ -10,7 +9,7 @@ import pageobject.HomeScreenPO;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TestCasesGameF extends BaseTest{
+public class TestCasesGameF extends BaseTest {
 
     @BeforeTest
     @Override
