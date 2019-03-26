@@ -35,7 +35,7 @@ public abstract class BaseTest {
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
 
     }
 
@@ -91,10 +91,10 @@ public abstract class BaseTest {
         return file.getAbsolutePath();
     }
 
-    private void quitDriver(){
+    private void quitDriver() {
         try {
             this.driver.quit();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
