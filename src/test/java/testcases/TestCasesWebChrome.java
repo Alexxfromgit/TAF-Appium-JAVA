@@ -22,10 +22,10 @@ public class TestCasesWebChrome extends BaseTest {
     @Test
     public void test_chrome_facebook_login() throws InterruptedException {
         driver.get("https://m.facebook.com/");
-        Thread.sleep(6000);
+        waitUtils.staticWait(2000);
 
         FacebookMainPage facebookMainPage = new FacebookMainPage(driver);
         facebookMainPage.fillLoginForm();
-        Thread.sleep(6000);
+        waitUtils.staticWait(2000);
     }
 }
