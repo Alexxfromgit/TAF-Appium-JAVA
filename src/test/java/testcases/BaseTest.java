@@ -86,7 +86,7 @@ public abstract class BaseTest {
         return augmentedDriver;
     }
 
-    private static String getAbsolutePath(String appRelativePath) {
+    public static String getAbsolutePath(String appRelativePath) {
         File file = new File(appRelativePath);
         return file.getAbsolutePath();
     }
