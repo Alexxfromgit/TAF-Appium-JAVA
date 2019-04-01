@@ -23,7 +23,7 @@ public class AndroidTestCases {
 
     @Parameters({"platformVersion", "deviceName", "port", "automationName"})
     @BeforeTest
-    public void setUp(String platformVersion, String deviceName, String port, String automationName) throws MalformedURLException {
+    public void setUpPage(String platformVersion, String deviceName, String port, String automationName) throws MalformedURLException {
         service = new AppiumServiceBuilder().usingPort(Integer.parseInt(port)).build();
         service.start();
 

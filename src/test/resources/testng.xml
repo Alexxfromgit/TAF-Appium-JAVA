@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" parallel="tests" thread-count="2">
-    <test name="Samsung">
-        <parameter name="platformVersion" value="7.0"/>
-        <parameter name="deviceName" value="5200d27ecasdasd"/>
+    <test name="Nexus_6_API_25">
+        <parameter name="platformVersion" value="7.1.1"/>
+        <parameter name="deviceName" value="emulator-5554"/>
         <parameter name="port" value="4740"/>
         <parameter name="automationName" value="UiAutomator2"/>
         <classes>
             <class name="testcases.AndroidTestCases"/>
         </classes>
     </test>
-    <test name="LG">
-        <parameter name="platformVersion" value="4.4.2"/>
-        <parameter name="deviceName" value="Q4U8YTPVUasdasd"/>
+    <test name="Pixel_API_27">
+        <parameter name="platformVersion" value="8.1.0"/>
+        <parameter name="deviceName" value="emulator-5556"/>
         <parameter name="port" value="4739"/>
-        <parameter name="automationName" value="uiAutomator1"/>
+        <parameter name="automationName" value="UiAutomator2"/>
         <classes>
             <class name="testcases.AndroidTestCases"/>
         </classes>
