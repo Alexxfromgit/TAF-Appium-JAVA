@@ -12,6 +12,7 @@ import pageobject.MentoringAppHomeScreen;
 import utils.PropertyUtils;
 
 import java.net.MalformedURLException;
+import java.util.Objects;
 
 import static testcases.BaseTest.getAbsolutePath;
 import static testcases.BaseTest.waitUtils;
@@ -23,11 +24,11 @@ public class AndroidTestCases {
 
     @Parameters({"platformVersion", "deviceName", "port", "automationName"})
     @BeforeTest
-    public void setUpPage(String platformVersion, String deviceName, String port, String automationName) throws MalformedURLException {
+    public void setUpPage(String platformVersion, String deviceName, String port, String automationName) {
         service = new AppiumServiceBuilder().usingPort(Integer.parseInt(port)).build();
         service.start();
 
-        if (service == null || !service.isRunning()) {
+        if (Objects.isNull(service) || !service.isRunning()) {
             throw new AppiumServerHasNotBeenStartedLocallyException("Appium service node not started");
         }
 
@@ -47,7 +48,7 @@ public class AndroidTestCases {
     }
 
     @AfterMethod
-    public void cleanUp() throws MalformedURLException {
+    public void cleanUp() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
         appHomeScreen.getInputField().clear();
         appHomeScreen.clickButtonPost();

@@ -19,21 +19,21 @@ public class TestCasesMentoringApp extends BaseTest {
     }
 
     @AfterMethod
-    public void cleanUp() throws MalformedURLException {
+    public void cleanUp() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
         appHomeScreen.getInputField().clear();
         appHomeScreen.clickButtonPost();
     }
 
     @Test(priority = 2)
-    public void test_application_first() throws InterruptedException {
+    public void test_application_first() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
         appHomeScreen.inputTextToInputField("test");
         appHomeScreen.clickButtonPost();
     }
 
     @Test(priority = 1)
-    public void test_dropdown_section_items() throws InterruptedException {
+    public void test_dropdown_section_items() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
 
         appHomeScreen.clickOnSectionDropDownMenu();
@@ -48,7 +48,7 @@ public class TestCasesMentoringApp extends BaseTest {
     }
 
     @Test(priority = 3)
-    public void test_checkbox_functionality() throws InterruptedException {
+    public void test_checkbox_functionality() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
 
         appHomeScreen.inputTextToInputField("test");
