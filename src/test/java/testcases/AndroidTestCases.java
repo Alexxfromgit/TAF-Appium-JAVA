@@ -61,6 +61,34 @@ public class AndroidTestCases {
         appHomeScreen.clickButtonPost();
     }
 
+    @Test
+    public void test_dropdown_section_items() {
+        MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
+
+        appHomeScreen.clickOnSectionDropDownMenu();
+        appHomeScreen.clickOnSectionItem(0);
+        appHomeScreen.checkOutputValue("1");
+        appHomeScreen.clickOnSectionDropDownMenu();
+        appHomeScreen.clickOnSectionItem(1);
+        appHomeScreen.checkOutputValue("0");
+        appHomeScreen.clickOnSectionDropDownMenu();
+        appHomeScreen.clickOnSectionItem(2);
+        appHomeScreen.checkOutputValue("3");
+    }
+
+    @Test
+    public void test_checkbox_functionality() {
+        MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
+
+        appHomeScreen.inputTextToInputField("test");
+        appHomeScreen.clickButtonPost();
+        appHomeScreen.checkOutputValue("test");
+        appHomeScreen.inputTextToInputField("testing");
+        appHomeScreen.clickOnCheckboxRevert();
+        appHomeScreen.clickButtonPost();
+        appHomeScreen.checkOutputValue("gnitset");
+    }
+
     @AfterSuite(alwaysRun = true)
     public void afterSuite() {
         if (driver != null) {
