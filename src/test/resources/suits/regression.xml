@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Full Regression" configfailurepolicy="continue">
+
+    <test name="App Tests">
+        <classes>
+            <class name="com.application.ta.mobile.app.GameFTests"/>
+            <class name="com.application.ta.mobile.app.MentoringAppTests"/>
+        </classes>
+    </test>
+
+    <test name="WebTests">
+        <classes>
+            <class name="com.application.ta.mobile.web.ChromeTests"/>
+        </classes>
+    </test>
+</suite>
