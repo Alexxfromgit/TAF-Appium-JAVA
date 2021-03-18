@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="tests" thread-count="2">
-    <test name="Nexus_6_API_25">
-        <parameter name="platformVersion" value="7.1.1"/>
-        <parameter name="deviceName" value="emulator-5554"/>
-        <parameter name="port" value="4740"/>
-        <parameter name="automationName" value="UiAutomator2"/>
-        <classes>
-            <class name="testcases.AndroidTestCases"/>
-        </classes>
-    </test>
-    <test name="Pixel_API_27">
-        <parameter name="platformVersion" value="8.1.0"/>
-        <parameter name="deviceName" value="emulator-5556"/>
-        <parameter name="port" value="4739"/>
-        <parameter name="automationName" value="UiAutomator2"/>
-        <classes>
-            <class name="testcases.AndroidTestCases"/>
-        </classes>
-    </test>
+<suite name="allSuites">
+<suite-files>
+    <suite-file path="suits/browserSuite.xml" />
+    <suite-file path="suits/parallelSuite.xml" />
+    <suite-file path="suits/regression.xml" />
+    <suite-file path="suits/gameF.xml" />
+    <suite-file path="suits/appRegression.xml" />
+</suite-files>
 </suite>

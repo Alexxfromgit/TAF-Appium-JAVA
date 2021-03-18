@@ -58,4 +58,17 @@ public class MentoringAppHomeScreen extends BasePO {
     public void clickOnCheckboxRevert() {
         checkboxRevert.click();
     }
+
+    public void checkPostFunctionality(String inputText){
+        inputTextToInputField(inputText);
+        clickButtonPost();
+        checkOutputValue(inputText);
+    }
+
+    public void checkRevertFunctionality(String inputText){
+        inputTextToInputField(inputText);
+        clickOnCheckboxRevert();
+        clickButtonPost();
+        checkOutputValue(new StringBuilder(inputText).reverse().toString());
+    }
 }

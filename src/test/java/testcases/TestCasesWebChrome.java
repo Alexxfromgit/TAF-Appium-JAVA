@@ -9,10 +9,9 @@ import pageobject.FacebookMainPage;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TestCasesWebChrome extends BaseTest {
+public class TestCasesWebChrome extends Base {
 
     @BeforeMethod
-    @Override
     public void setUpPage() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         setDesiredCapabilitiesForAndroidWeb(capabilities);

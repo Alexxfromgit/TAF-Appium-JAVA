@@ -80,13 +80,8 @@ public class AndroidTestCases {
     public void test_checkbox_functionality() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
 
-        appHomeScreen.inputTextToInputField("test");
-        appHomeScreen.clickButtonPost();
-        appHomeScreen.checkOutputValue("test");
-        appHomeScreen.inputTextToInputField("testing");
-        appHomeScreen.clickOnCheckboxRevert();
-        appHomeScreen.clickButtonPost();
-        appHomeScreen.checkOutputValue("gnitset");
+        appHomeScreen.checkPostFunctionality("test");
+        appHomeScreen.checkRevertFunctionality("testing");
     }
 
     @AfterSuite(alwaysRun = true)
