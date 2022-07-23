@@ -17,40 +17,40 @@ import java.util.concurrent.TimeUnit;
  */
 public class WaitUtils {
 
-    private final int explicityWaitDefault = PropertyUtils.getIntegerProperty("explicitWait", 10);
+    private final int explicitWaitDefault = PropertyUtils.getIntegerProperty("explicitWait", 10);
 
-    public void staticWait(final long milis) {
+    public void staticWait(final long millis) {
         try {
-            TimeUnit.MILLISECONDS.sleep(milis);
+            TimeUnit.MILLISECONDS.sleep(millis);
         } catch (final InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public void waitForElementToBeClickable(final WebElement element, final WebDriver driver) {
-        new WebDriverWait(driver, this.explicityWaitDefault)
+        new WebDriverWait(driver, this.explicitWaitDefault)
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitForElementToBeInvisible(final By locator, final WebDriver driver) {
         long s = System.currentTimeMillis();
-        new WebDriverWait(driver, this.explicityWaitDefault)
+        new WebDriverWait(driver, this.explicitWaitDefault)
                 .until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     public void waitForElementToBePresent(final By locator, final WebDriver driver) {
-        new WebDriverWait(driver, this.explicityWaitDefault)
+        new WebDriverWait(driver, this.explicitWaitDefault)
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     public void waitForElementToBeVisible(final By locator, final WebDriver driver) {
-        new WebDriverWait(driver, this.explicityWaitDefault)
+        new WebDriverWait(driver, this.explicitWaitDefault)
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public void waitForElementToBeVisible(final WebElement element, final WebDriver driver) {
         long s = System.currentTimeMillis();
-        new WebDriverWait(driver, this.explicityWaitDefault)
+        new WebDriverWait(driver, this.explicitWaitDefault)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -62,18 +62,18 @@ public class WaitUtils {
 
     public void waitForElementsToBeInvisible(final List<WebElement> elements, final WebDriver driver) {
         final long s = System.currentTimeMillis();
-        new WebDriverWait(driver, this.explicityWaitDefault)
+        new WebDriverWait(driver, this.explicitWaitDefault)
                 .until(ExpectedConditions.invisibilityOfAllElements(elements));
     }
 
     public void waitForElementsToBeNotPresent(final By element, WebDriver driver) {
         long s = System.currentTimeMillis();
-        new WebDriverWait(driver, this.explicityWaitDefault)
+        new WebDriverWait(driver, this.explicitWaitDefault)
                 .until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(element)));
     }
 
     public void waitUntilNestedElementPresent(WebElement element, By locator, WebDriver driver) {
-        new WebDriverWait(driver, this.explicityWaitDefault)
+        new WebDriverWait(driver, this.explicitWaitDefault)
                 .until(ExpectedConditions.presenceOfNestedElementLocatedBy(element, locator));
     }
 }
