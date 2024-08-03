@@ -7,7 +7,7 @@
         <parameter name="port" value="4740"/>
         <parameter name="automationName" value="UiAutomator2"/>
         <classes>
-            <class name="testcases.AndroidTestCases"/>
+            <class name="testcases.AndroidTestCase"/>
         </classes>
     </test>
     <test name="Pixel_API_27">
@@ -16,7 +16,7 @@
         <parameter name="port" value="4739"/>
         <parameter name="automationName" value="UiAutomator2"/>
         <classes>
-            <class name="testcases.AndroidTestCases"/>
+            <class name="testcases.AndroidTestCase"/>
         </classes>
     </test>
 </suite>

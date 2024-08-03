@@ -14,22 +14,21 @@ import utils.ScreenshotUtility;
 import utils.WaitUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 
 @Listeners(ScreenshotUtility.class)
 public abstract class BaseTest {
 
     public static AppiumDriver driver;
-    public final static String APPIUM_SERVER_URL = PropertyUtils.getProperty("appium.server.url", "http://127.0.0.1:4723/wd/hub");
-    public final static int IMPLICIT_WAIT = PropertyUtils.getIntegerProperty("implicitWait", 30);
+    public static final String APPIUM_SERVER_URL = PropertyUtils.getProperty("appium.server.url", "http://127.0.0.1:4723/wd/hub");
+    public static final int IMPLICIT_WAIT = PropertyUtils.getIntegerProperty("implicitWait", 30);
     public static WaitUtils waitUtils = new WaitUtils();
 
     @BeforeMethod
     public abstract void setUpPage() throws MalformedURLException;
 
     @AfterMethod(alwaysRun = true)
-    public void afterMethod(final ITestResult result) throws IOException {
+    public void afterMethod(final ITestResult result) {
         String fileName = result.getTestClass().getName() + "_" + result.getName();
         System.out.println("Test Case: [" + fileName + "] executed..!");
     }
@@ -82,13 +81,11 @@ public abstract class BaseTest {
     }
 
     public static WebDriver getScreenshotableWebDriver() {
-        final WebDriver augmentedDriver = new Augmenter().augment(driver);
-        return augmentedDriver;
+        return new Augmenter().augment(driver);
     }
 
     public static String getAbsolutePath(String appRelativePath) {
-        File file = new File(appRelativePath);
-        return file.getAbsolutePath();
+        return new File(appRelativePath).getAbsolutePath();
     }
 
     private void quitDriver() {

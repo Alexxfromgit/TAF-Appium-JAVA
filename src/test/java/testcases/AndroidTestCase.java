@@ -11,13 +11,12 @@ import org.testng.annotations.*;
 import pageobject.MentoringAppHomeScreen;
 import utils.PropertyUtils;
 
-import java.net.MalformedURLException;
 import java.util.Objects;
 
 import static testcases.BaseTest.getAbsolutePath;
 import static testcases.BaseTest.waitUtils;
 
-public class AndroidTestCases {
+public class AndroidTestCase {
 
     protected AppiumDriverLocalService service;
     public AndroidDriver<AndroidElement> driver;
@@ -32,14 +31,14 @@ public class AndroidTestCases {
             throw new AppiumServerHasNotBeenStartedLocallyException("Appium service node not started");
         }
 
-        String APP_NAME = PropertyUtils.getProperty("android.app.name");
-        String APP_RELATIVE_PATH = PropertyUtils.getProperty("android.app.location") + APP_NAME;
-        String APP_PATH = getAbsolutePath(APP_RELATIVE_PATH);
+        String appName = PropertyUtils.getProperty("android.app.name");
+        String appRelativePath = PropertyUtils.getProperty("android.app.location") + appName;
+        String appPath = getAbsolutePath(appRelativePath);
 
         DesiredCapabilities dc = new DesiredCapabilities();
         dc.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-        dc.setCapability(MobileCapabilityType.APP, APP_PATH);
+        dc.setCapability(MobileCapabilityType.APP, appPath);
         dc.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
         dc.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
 
@@ -64,7 +63,6 @@ public class AndroidTestCases {
     @Test
     public void test_dropdown_section_items() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
-
         appHomeScreen.clickOnSectionDropDownMenu();
         appHomeScreen.clickOnSectionItem(0);
         appHomeScreen.checkOutputValue("1");
