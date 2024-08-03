@@ -35,7 +35,6 @@ public class TestCasesMentoringApp extends BaseTest {
     @Test(priority = 1)
     public void test_dropdown_section_items() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
-
         appHomeScreen.clickOnSectionDropDownMenu();
         appHomeScreen.clickOnSectionItem(0);
         appHomeScreen.checkOutputValue("1");
@@ -50,7 +49,6 @@ public class TestCasesMentoringApp extends BaseTest {
     @Test(priority = 3)
     public void test_checkbox_functionality() {
         MentoringAppHomeScreen appHomeScreen = new MentoringAppHomeScreen(driver);
-
         appHomeScreen.inputTextToInputField("test");
         appHomeScreen.clickButtonPost();
         appHomeScreen.checkOutputValue("test");

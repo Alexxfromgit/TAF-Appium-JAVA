@@ -14,11 +14,12 @@ import java.net.URL;
 /**
  * Android Browser Sauce Labs Test.
  */
-public class AndroidBrowserSaucelabsTest extends BaseTest{
+public class AndroidBrowserSauceLabsTest extends BaseTest{
+
     public static final String USERNAME = "YOUR_USERNAME";
-    public static final String ACCESS_KEY = "YOUR_ACESS_KEY";
+    public static final String ACCESS_KEY = "YOUR_ACCESS_KEY";
     public static final String URL = "https://"+USERNAME+":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
-    public static AndroidDriver<?> mobiledriver;
+    public static AndroidDriver<?> mobileDriver;
 
     @BeforeTest
     public void beforeTest( ) throws MalformedURLException {
@@ -29,18 +30,18 @@ public class AndroidBrowserSaucelabsTest extends BaseTest{
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Samsung Galaxy S4 Emulator");
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Browser");
         capabilities.setCapability("newCommandTimeout", 2000);
-        mobiledriver = new AndroidDriver<>(new URL(URL), capabilities);
+        mobileDriver = new AndroidDriver<>(new URL(URL), capabilities);
     }
 
     @AfterTest
     public void afterTest( ){
-        mobiledriver.quit();
+        mobileDriver.quit();
     }
 
     @Test
     public static void launchBrowser(){
-        mobiledriver.get("http://appium.io/");
-        Assert.assertEquals(mobiledriver.getCurrentUrl(), "http://appium.io/", "URL Mismatch");
-        Assert.assertEquals(mobiledriver.getTitle(), "Appium: Mobile App Automation Made Awesome.", "Title Mismatch");
+        mobileDriver.get("http://appium.io/");
+        Assert.assertEquals(mobileDriver.getCurrentUrl(), "http://appium.io/", "URL Mismatch");
+        Assert.assertEquals(mobileDriver.getTitle(), "Appium: Mobile App Automation Made Awesome.", "Title Mismatch");
     }
 }

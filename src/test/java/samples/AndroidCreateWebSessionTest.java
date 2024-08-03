@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class AndroidCreateWebSessionTest extends BaseTest {
+
     private AndroidDriver<WebElement> driver;
 
     @BeforeClass

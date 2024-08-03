@@ -9,6 +9,7 @@ import org.testng.annotations.*;
 import java.io.File;
 
 public class AndroidCreateSessionTest extends BaseTest {
+
     private AndroidDriver<WebElement> driver;
 
     @BeforeClass

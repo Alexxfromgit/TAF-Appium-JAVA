@@ -23,8 +23,8 @@ public class TestCasesGameF {
     protected AppiumDriverLocalService service;
     public AndroidDriver<AndroidElement> driver;
 
-    @Parameters({"platformVersion", "deviceName", "port", "automationName"})
     @BeforeTest
+    @Parameters({"platformVersion", "deviceName", "port", "automationName"})
     public void setUpPage(String platformVersion, String deviceName, String port, String automationName) {
         service = new AppiumServiceBuilder().usingPort(Integer.parseInt(port)).build();
         service.start();
