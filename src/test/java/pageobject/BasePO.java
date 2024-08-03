@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class BasePO {
 
-    public final static int IMPLICIT_WAIT = PropertyUtils.getIntegerProperty("implicitWait", 30);
+    public static final int IMPLICIT_WAIT = PropertyUtils.getIntegerProperty("implicitWait", 30);
     WaitUtils waitUtils;
     protected final AppiumDriver driver;
 

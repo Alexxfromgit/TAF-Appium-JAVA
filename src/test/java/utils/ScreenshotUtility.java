@@ -50,7 +50,7 @@ public class ScreenshotUtility implements ITestListener {
     public void captureScreenShot(ITestResult result, String status) {
         final WebDriver augmentedDriver = BaseTest.getScreenshotableWebDriver();
         String destDir = "";
-        String passfailMethod = result.getMethod().getRealClass().getSimpleName() + "." + result.getMethod().getMethodName();
+        String passFailMethod = result.getMethod().getRealClass().getSimpleName() + "." + result.getMethod().getMethodName();
 
         File scrFile = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
         DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy__hh_mm_ssaa");
@@ -61,10 +61,10 @@ public class ScreenshotUtility implements ITestListener {
         }
         new File(destDir).mkdirs();
 
-        String destFile = passfailMethod + " - " + dateFormat.format(new Date()) + ".png";
+        String destinationFile = passFailMethod + " - " + dateFormat.format(new Date()) + ".png";
 
         try {
-            FileUtils.copyFile(scrFile, new File(destDir + "/" + destFile));
+            FileUtils.copyFile(scrFile, new File(destDir + "/" + destinationFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
