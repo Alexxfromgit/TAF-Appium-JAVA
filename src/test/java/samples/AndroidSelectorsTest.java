@@ -13,6 +13,7 @@ import java.io.File;
 import java.util.List;
 
 public class AndroidSelectorsTest extends BaseTest {
+
     private AndroidDriver<WebElement> driver;
     private static AppiumDriverLocalService service;
     private final String PACKAGE = "io.appium.android.apis";
@@ -25,7 +26,7 @@ public class AndroidSelectorsTest extends BaseTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", "Android Emulator");
         capabilities.setCapability("app", app.getAbsolutePath());
-        capabilities.setCapability("appPackage", "io.appium.android.apis");
+        capabilities.setCapability("appPackage", PACKAGE);
         capabilities.setCapability("appActivity", ".ApiDemos");
         driver = new AndroidDriver<WebElement>(getServiceUrl(), capabilities);
     }
@@ -54,13 +55,12 @@ public class AndroidSelectorsTest extends BaseTest {
         // Look for elements by the class name. In Android this is the Java Class Name of the view.
         List<WebElement> linearLayoutElements = (List<WebElement>) driver.findElementsByClassName("android.widget.FrameLayout");
         Assert.assertTrue(linearLayoutElements.size() > 1);
-    };
+    }
 
     @Test
     public void testFindElementsByXPath () {
         // Find elements by XPath
         List<WebElement> linearLayoutElements = (List<WebElement>) driver.findElementsByXPath("//*[@class=\"android.widget.FrameLayout\"]");
         Assert.assertTrue(linearLayoutElements.size() > 1);
-    };
-
+    }
 }

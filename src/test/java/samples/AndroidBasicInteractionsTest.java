@@ -18,6 +18,7 @@ import java.io.IOException;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class AndroidBasicInteractionsTest extends BaseTest {
+
     private AndroidDriver<WebElement> driver;
     private final String SEARCH_ACTIVITY = ".app.SearchInvoke";
     private final String ALERT_DIALOG_ACTIVITY = ".app.AlertDialogSamples";
@@ -38,7 +39,6 @@ public class AndroidBasicInteractionsTest extends BaseTest {
     public void tearDown() {
         driver.quit();
     }
-
 
     @Test()
     public void testSendKeys() {
