@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="allSuites">
+<suite-files>
+    <suite-file path="suits/browserSuite.xml" />
+    <suite-file path="suits/parallelSuite.xml" />
+    <suite-file path="suits/regression.xml" />
+    <suite-file path="suits/gameF.xml" />
+    <suite-file path="suits/appRegression.xml" />
+</suite-files>
+</suite>

@@ -35,7 +35,7 @@ public class PropertyUtils {
         return integerValue;
     }
 
-    public static String getProperty(final String key, final String defaultValue){
+    public static String getProperty(final String key, final String defaultValue) {
         return PropertyUtils.getInstance().props.getProperty(key, defaultValue);
     }
 
@@ -49,7 +49,7 @@ public class PropertyUtils {
             } else {
                 throw new UnableToLoadPropertiesException("property file '" + path + "'not found in the class path");
             }
-        } catch (final Exception e){
+        } catch (final Exception e) {
             e.printStackTrace();
         } finally {
             try {
@@ -71,7 +71,7 @@ class UnableToLoadPropertiesException extends RuntimeException {
         super(s);
     }
 
-    public UnableToLoadPropertiesException(final String string, final Exception ex){
+    public UnableToLoadPropertiesException(final String string, final Exception ex) {
         super(string, ex);
     }
 }
