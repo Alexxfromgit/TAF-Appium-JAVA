@@ -17,7 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-@Listeners({ScreenshotUtility.class})
+@Listeners(ScreenshotUtility.class)
 public abstract class BaseTest {
 
     public static AppiumDriver driver;
@@ -35,7 +35,7 @@ public abstract class BaseTest {
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
 
     }
 
@@ -86,15 +86,15 @@ public abstract class BaseTest {
         return augmentedDriver;
     }
 
-    private static String getAbsolutePath(String appRelativePath) {
+    public static String getAbsolutePath(String appRelativePath) {
         File file = new File(appRelativePath);
         return file.getAbsolutePath();
     }
 
-    private void quitDriver(){
+    private void quitDriver() {
         try {
             this.driver.quit();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
