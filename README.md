@@ -5,7 +5,7 @@
   
   ![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)
   
-  </p>
+</p>
 
 # Guide
 
@@ -86,3 +86,4 @@ adb shell getprop
 ```
 
 #### Step 4 - Run your written tests
+
