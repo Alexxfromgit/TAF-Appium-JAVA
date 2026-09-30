@@ -53,7 +53,7 @@ public class MentoringHomeScreen extends BasePage {
     }
 
     public boolean isRevertChecked() {
-        return Boolean.parseBoolean(waits.visible(revertCheckbox).getDomAttribute("checked"));
+        return Boolean.parseBoolean(waits.visible(revertCheckbox).getAttribute("checked"));
     }
 
     @Step("Select section #{index}")
