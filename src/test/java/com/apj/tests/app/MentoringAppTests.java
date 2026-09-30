@@ -26,10 +26,18 @@ public class MentoringAppTests extends BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void resetScreen() {
-        if (homeScreen.isRevertChecked()) {
-            homeScreen.toggleRevert();
+        // Session or screen setup failed: nothing to reset, and the original failure stays visible
+        if (homeScreen == null) {
+            return;
         }
-        homeScreen.clearInput().tapPost();
+        try {
+            if (homeScreen.isRevertChecked()) {
+                homeScreen.toggleRevert();
+            }
+            homeScreen.clearInput().tapPost();
+        } finally {
+            homeScreen = null;
+        }
     }
 
     @Test(description = "Posted text is shown in the output field")

@@ -45,7 +45,10 @@ public class ScreenshotListener implements ITestListener {
                 byte[] png = driver.getScreenshotAs(OutputType.BYTES);
                 Path dir = Path.of("build", "screenshots", folder);
                 Files.createDirectories(dir);
-                Path file = dir.resolve(name + "_" + LocalDateTime.now().format(TIMESTAMP) + ".png");
+                // The <test> name identifies the device, so parallel runs of one method don't overwrite each other
+                String fileName = String.join("_", result.getTestContext().getName(), name,
+                        LocalDateTime.now().format(TIMESTAMP));
+                Path file = dir.resolve(fileName.replaceAll("[^A-Za-z0-9._-]", "_") + ".png");
                 Files.write(file, png);
                 Allure.addAttachment(name, "image/png", new ByteArrayInputStream(png), "png");
                 LOG.info("Screenshot saved: {}", file.toAbsolutePath());
