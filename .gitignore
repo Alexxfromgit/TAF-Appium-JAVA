@@ -1,29 +1,24 @@
+### Gradle ###
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
+### IDE ###
 .idea
 *.iws
 *.iml
 *.ipr
 /out/
+.classpath
+.factorypath
+.project
+.settings
+.vscode
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### ScreenShots ###
+### Test artifacts ###
 /screenshots/
+/allure-results/
+/logs/
+
+### Downloaded apps ###
+src/test/resources/apps/ApiDemos-debug.apk
