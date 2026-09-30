@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-
-<suite name="Full App Regression" configfailurepolicy="continue">
-    <suite-files>
-        <suite-file path="parallelSuite.xml"/>
-        <suite-file path="gameF.xml"/>
-    </suite-files>
-</suite>

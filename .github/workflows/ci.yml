@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  build:
+    # Device suites need an emulator/real device + Appium; CI compiles everything
+    # and runs the device-free framework tests plus a TestNG dry run of every suite.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Framework tests
+        run: ./gradlew test -Psuite=unit
+
+      - name: Validate device suites (dry run)
+        run: |
+          for suite in mentoring gamef web samples parallel regression; do
+            ./gradlew test -Psuite=$suite -Dtestng.mode.dryrun=true
+          done
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-reports
+          path: |
+            build/reports/tests
+            build/allure-results
