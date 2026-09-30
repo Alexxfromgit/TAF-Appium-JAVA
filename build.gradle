@@ -1,37 +1,94 @@
 plugins {
-    id 'java'
+    id 'java-library'
+    id 'io.qameta.allure' version '4.3.0'
 }
 
-group 'apj.framework'
-version '1.0-SNAPSHOT'
+group = 'apj.framework'
+version = '2.0.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
-def suite1 = project.hasProperty("regression")
-def suite2 = project.hasProperty("parallelSuite")
-def suite3 = project.hasProperty("appRegression")
-
-test {
-    useTestNG() {
-        options {
-            suites 'src/test/java/resources/testng.xml'
-            setParallel('tests')
-            setThreadCount(2)
-        }
-        if (project.hasProperty('suite1')) { suites './src/test/resources/suits/gameF.xml' }
-        if (project.hasProperty('suite2')) { suites './src/test/resources/suits/parallelSuite.xml' }
-        if (project.hasProperty('suite3')) { suites './src/test/resources/suits/appRegression.xml' }
-    }
+ext {
+    appiumClientVersion = '10.1.1'
+    seleniumVersion = '4.49.0'
+    testngVersion = '7.12.0'
+    allureVersion = '2.35.5'
+    slf4jVersion = '2.0.17'
+    logbackVersion = '1.5.38'
+    assertjVersion = '3.27.7'
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'io.appium', name: 'java-client', version: '6.1.0'
-    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
-    compileOnly 'org.projectlombok:lombok:1.18.6'
-    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+    // Pin Selenium explicitly: java-client declares an open version range
+    api platform("org.seleniumhq.selenium:selenium-bom:$seleniumVersion")
+    api "io.appium:java-client:$appiumClientVersion"
+    api "org.testng:testng:$testngVersion"
+    api "org.slf4j:slf4j-api:$slf4jVersion"
+    implementation "io.qameta.allure:allure-java-commons:$allureVersion"
+
+    runtimeOnly "ch.qos.logback:logback-classic:$logbackVersion"
+
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
+}
+
+allure {
+    version = allureVersion
+    adapter {
+        autoconfigure = true
+        aspectjWeaver = true
+        frameworks {
+            testng {
+                adapterVersion = allureVersion
+            }
+        }
+    }
+}
+
+/*
+ * Suite selection:  ./gradlew test -Psuite=mentoring
+ * Available suites live in src/test/resources/suites/<name>.xml
+ */
+def suiteName = project.findProperty('suite') ?: 'unit'
+
+// Framework settings passed with -D on the command line are forwarded to the test JVM
+def forwardedPrefixes = ['appium.', 'platform', 'android.', 'ios.', 'device', 'sauce.', 'wait.', 'screenshots.', 'app.', 'web.', 'testng.']
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-Xlint:deprecation'
+}
+
+tasks.named('test', Test) {
+    useTestNG {
+        suites "src/test/resources/suites/${suiteName}.xml"
+        useDefaultListeners = false
+    }
+    systemProperties System.properties.findAll { k, v -> forwardedPrefixes.any { k.toString().startsWith(it) } }
+    // Device runs must always hit the device, never the up-to-date cache
+    outputs.upToDateWhen { false }
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat = 'full'
+    }
+}
+
+// ApiDemos is the standard Appium demo app used by the "samples" suite
+tasks.register('downloadApiDemos') {
+    group = 'verification'
+    description = 'Downloads ApiDemos-debug.apk into src/test/resources/apps'
+    def target = file('src/test/resources/apps/ApiDemos-debug.apk')
+    outputs.file(target)
+    doLast {
+        def url = 'https://github.com/appium/android-apidemos/releases/latest/download/ApiDemos-debug.apk'
+        logger.lifecycle("Downloading $url")
+        new URI(url).toURL().withInputStream { input -> target.withOutputStream { it << input } }
+    }
 }
