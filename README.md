@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Alexxfromgit/apj_automation_framework/actions/workflows/ci.yml"><img src="https://github.com/Alexxfromgit/apj_automation_framework/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/Alexxfromgit/TAF-Appium-JAVA/actions/workflows/ci.yml"><img src="https://github.com/Alexxfromgit/TAF-Appium-JAVA/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white" alt="Java 21">
   <img src="https://img.shields.io/badge/Appium-3-662D91?logo=appium&logoColor=white" alt="Appium 3">
   <img src="https://img.shields.io/badge/java--client-10.1-662D91" alt="Appium java-client 10.1">
@@ -146,8 +146,8 @@ For a physical device, set `android.udid` to the serial from `adb devices` (see 
 ### 4. Run
 
 ```shell
-git clone https://github.com/Alexxfromgit/apj_automation_framework.git
-cd apj_automation_framework
+git clone https://github.com/Alexxfromgit/TAF-Appium-JAVA.git
+cd TAF-Appium-JAVA
 ./gradlew test -Psuite=mentoring
 ```
 
