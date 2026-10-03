@@ -11,6 +11,7 @@
   <img src="https://img.shields.io/badge/TestNG-7.12-DD4B39" alt="TestNG 7.12">
   <img src="https://img.shields.io/badge/Gradle-9.8-02303A?logo=gradle&logoColor=white" alt="Gradle 9.8">
   <img src="https://img.shields.io/badge/Allure-report-FF6B35" alt="Allure">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
 </p>
 
 <p align="center">
@@ -19,45 +20,45 @@
 </p>
 
 <p align="center">
-  <a href="#-quick-start">Quick start</a> ·
-  <a href="#-running-tests">Running tests</a> ·
-  <a href="#-configuration">Configuration</a> ·
-  <a href="#-writing-tests">Writing tests</a> ·
-  <a href="#-reports--artifacts">Reports</a> ·
-  <a href="#-troubleshooting">Troubleshooting</a>
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#running-tests">Running tests</a> ·
+  <a href="#configuration">Configuration</a> ·
+  <a href="#writing-tests">Writing tests</a> ·
+  <a href="#reports--artifacts">Reports</a> ·
+  <a href="#troubleshooting">Troubleshooting</a>
 </p>
 
 ---
 
-## ✨ Features
+## Features
 
 | | |
 |---|---|
-| 📱 **Native & web** | The same `BaseTest` covers native apps (`Target.app(...)`) and mobile browsers (`Target.browser(...)`). |
-| ⚡ **Parallel devices** | Drivers are held per thread, so the same classes run on several devices at once from a single suite file. |
-| 🖥️ **Local or remote Appium** | The framework starts an Appium server per port, or connects to an existing server, a Grid or Sauce Labs. |
-| 🧩 **Layered config** | `config.properties` → device profile → environment variables → `-D` flags. |
-| ⏱️ **No sleeps** | Page objects wait for elements explicitly through `BasePage` and `Waits`. |
-| 📊 **Reporting** | Allure report with `@Step`s, plus screenshots on failure that include the device name. |
-| 🍏 **iOS ready** | `platform=ios` switches to `IOSDriver` with `XCUITestOptions`. |
-| ✅ **CI** | GitHub Actions compiles the project, runs the device-free tests and validates every suite. |
+| **Native & web** | The same `BaseTest` covers native apps (`Target.app(...)`) and mobile browsers (`Target.browser(...)`). |
+| **Parallel devices** | Drivers are held per thread, so the same classes run on several devices at once from a single suite file. |
+| **Local or remote Appium** | The framework starts an Appium server per port, or connects to an existing server, a Grid or Sauce Labs. |
+| **Layered config** | `config.properties` -> device profile -> environment variables -> `-D` flags. |
+| **No sleeps** | Page objects wait for elements explicitly through `BasePage` and `Waits`. |
+| **Reporting** | Allure report with `@Step`s, plus screenshots on failure that include the device name. |
+| **iOS ready** | `platform=ios` switches to `IOSDriver` with `XCUITestOptions`. |
+| **CI** | GitHub Actions compiles the project, runs the device-free tests and validates every suite. |
 
-## 🧱 Architecture
+## Architecture
 
 ```mermaid
 flowchart TB
     suite["TestNG suite<br/>suites/*.xml"] --> base["BaseTest<br/>@BeforeClass"]
-    cfg["Config<br/>-D › env › device profile › config.properties"] --> dev["DeviceSettings"]
+    cfg["Config<br/>-D > env > device profile > config.properties"] --> dev["DeviceSettings"]
     suite -- "suite parameters<br/>(device, ports)" --> dev
     base --> dev --> factory["DriverFactory<br/>UiAutomator2Options / XCUITestOptions"]
     factory --> server{"AppiumServerManager"}
     server -- local --> local["Appium server<br/>one per port"]
     server -- remote --> remote["Remote Appium<br/>Grid · Sauce Labs"]
-    local --> device["📱 Emulator / device"]
+    local --> device["Emulator / device"]
     remote --> device
     factory --> dm["DriverManager<br/>ThreadLocal driver"]
     dm --> pages["Page objects<br/>BasePage + Waits"]
-    dm --> shots["ScreenshotListener<br/>→ Allure"]
+    dm --> shots["ScreenshotListener<br/>to Allure"]
 ```
 
 <details>
@@ -93,7 +94,7 @@ src/test/resources
 
 </details>
 
-## 🚀 Quick start
+## Quick start
 
 ### 1. Install the prerequisites
 
@@ -115,7 +116,7 @@ appium driver doctor uiautomator2
 
 ### 2. Start a device
 
-Create an emulator in Android Studio (**Device Manager → Create Virtual Device**) or on the command line:
+Create an emulator in Android Studio (**Device Manager > Create Virtual Device**) or on the command line:
 
 ```shell
 sdkmanager "system-images;android-33;google_apis;x86_64"
@@ -125,7 +126,7 @@ emulator -avd Pixel_API_33
 
 > [!IMPORTANT]
 > `Mentoring.apk` targets SDK 17, and **Android 14+ blocks installing apps that target SDK < 23**.
-> Use an Android 13 (API 33) or older image for it. See [Troubleshooting](#-troubleshooting) for a workaround.
+> Use an Android 13 (API 33) or older image for it. See [Troubleshooting](#troubleshooting) for a workaround.
 
 ### 3. Point the framework at the device
 
@@ -153,19 +154,19 @@ cd TAF-Appium-JAVA
 
 The framework starts the Appium server itself, so you don't need to launch it by hand.
 
-## 🧪 Running tests
+## Running tests
 
 Choose a suite with `-Psuite=<name>`. The files live in `src/test/resources/suites/`.
 
-| Suite | Command | What runs | Device |
-|-------|---------|-----------|:------:|
-| `unit` | `./gradlew test` | framework tests (the default suite) | — |
-| `mentoring` | `./gradlew test -Psuite=mentoring` | Mentoring app | 📱 |
-| `gamef` | `./gradlew test -Psuite=gamef` | GameF (Unity) app | 📱 |
-| `web` | `./gradlew test -Psuite=web` | mobile Chrome against [the-internet](https://the-internet.herokuapp.com) | 📱 |
-| `samples` | `./gradlew downloadApiDemos test -Psuite=samples` | Appium ApiDemos samples (downloads the APK first) | 📱 |
-| `regression` | `./gradlew test -Psuite=regression` | mentoring + gamef + web | 📱 |
-| `parallel` | `./gradlew test -Psuite=parallel` | app tests on **two emulators at once** | 📱📱 |
+| Suite | Command | What runs | Needs a device |
+|-------|---------|-----------|--------|
+| `unit` | `./gradlew test` | framework tests (the default suite) | no |
+| `mentoring` | `./gradlew test -Psuite=mentoring` | Mentoring app | yes |
+| `gamef` | `./gradlew test -Psuite=gamef` | GameF (Unity) app | yes |
+| `web` | `./gradlew test -Psuite=web` | mobile Chrome against [the-internet](https://the-internet.herokuapp.com) | yes |
+| `samples` | `./gradlew downloadApiDemos test -Psuite=samples` | Appium ApiDemos samples (downloads the APK first) | yes |
+| `regression` | `./gradlew test -Psuite=regression` | mentoring + gamef + web | yes |
+| `parallel` | `./gradlew test -Psuite=parallel` | app tests on **two emulators at once** | 2 devices |
 
 > [!TIP]
 > Add `-Dtestng.mode.dryrun=true` to list a suite's tests without opening any session. CI uses this to validate every suite.
@@ -196,12 +197,12 @@ To add a device, copy a block, give it unique ports and raise `thread-count`.
 If you start the server yourself, run `appium --allow-insecure uiautomator2:chromedriver_autodownload`, so it
 downloads the Chromedriver that matches the device's Chrome for web tests. The local mode enables this automatically.
 
-## 🔧 Configuration
+## Configuration
 
 Each key is looked up in this order, and the first match wins:
 
 ```text
--Dkey=value  →  env KEY_NAME  →  devices/<device>.properties  →  config.properties
+-Dkey=value  ->  env KEY_NAME  ->  devices/<device>.properties  ->  config.properties
 ```
 
 <details>
@@ -213,22 +214,22 @@ Each key is looked up in this order, and the first match wins:
 | `appium.server.mode` | `local` | `local` starts Appium; `remote` uses `appium.server.url` |
 | `appium.server.url` | `http://127.0.0.1:4723/` | remote server, Grid or cloud URL (Appium 2+ has no `/wd/hub`) |
 | `appium.port` | `4723` | port of the local server |
-| `appium.node.path`, `appium.js.path` | — | only needed when Appium can't be found automatically |
+| `appium.node.path`, `appium.js.path` | - | only needed when Appium can't be found automatically |
 | `android.device.name`, `android.platform.version`, `android.udid` | `emulator-5554`, `13` | target device |
-| `android.app.<key>.path` / `.package` / `.activity` | — | app under test, used as `Target.app("<key>")` |
-| `ios.device.name`, `ios.platform.version`, `ios.udid` | — | iOS device |
-| `ios.app.<key>.path` / `.bundle.id` | — | iOS app under test |
+| `android.app.<key>.path` / `.package` / `.activity` | - | app under test, used as `Target.app("<key>")` |
+| `ios.device.name`, `ios.platform.version`, `ios.udid` | - | iOS device |
+| `ios.app.<key>.path` / `.bundle.id` | - | iOS app under test |
 | `app.no.reset`, `app.full.reset` | `false` | app reset strategy |
 | `wait.implicit`, `wait.explicit` | `10`, `15` | timeouts in seconds |
 | `screenshots.on.success` | `false` | also capture screenshots of passed tests |
 | `web.base.url`, `web.browser` | the-internet, `Chrome` | mobile web tests |
-| `sauce.username`, `sauce.access.key` | — | enable Sauce Labs (use env `SAUCE_USERNAME` / `SAUCE_ACCESS_KEY`) |
-| `sauce.build`, `sauce.appium.version` | — | optional Sauce Labs settings |
+| `sauce.username`, `sauce.access.key` | - | enable Sauce Labs (use env `SAUCE_USERNAME` / `SAUCE_ACCESS_KEY`) |
+| `sauce.build`, `sauce.appium.version` | - | optional Sauce Labs settings |
 
 </details>
 
 <details>
-<summary><b>🍏 iOS</b></summary>
+<summary><b>iOS</b></summary>
 
 With `platform=ios`, `DriverFactory` creates an `IOSDriver` with `XCUITestOptions`, and `systemPort` becomes
 the WDA local port. To share page objects between platforms, put `@iOSXCUITFindBy` next to `@AndroidFindBy`.
@@ -241,7 +242,7 @@ the WDA local port. To share page objects between platforms, put `@iOSXCUITFindB
 </details>
 
 <details>
-<summary><b>☁️ Sauce Labs</b></summary>
+<summary><b>Sauce Labs</b></summary>
 
 `sauce:options` are added automatically when `sauce.username` is set.
 
@@ -256,7 +257,7 @@ For native apps, upload the APK to Sauce storage and set `android.app.<key>.path
 
 </details>
 
-## 📝 Writing tests
+## Writing tests
 
 **1. Register the app** in `config.properties`:
 
@@ -298,17 +299,17 @@ public class MyAppTests extends BaseTest {
 
 **4. Add the class to a suite** in `src/test/resources/suites/`.
 
-## 📊 Reports & artifacts
+## Reports & artifacts
 
 | Artifact | Location |
 |----------|----------|
-| Allure report | `./gradlew allureServe` · or `./gradlew allureReport` → `build/reports/allure-report` |
+| Allure report | `./gradlew allureServe` · or `./gradlew allureReport` -> `build/reports/allure-report` |
 | Gradle test report | `build/reports/tests/test/index.html` |
 | Screenshots | `build/screenshots/failures/<test>_<Class.method>_<timestamp>.png` (also attached to Allure) |
 | Framework log | `build/logs/tests.log` |
 | Appium server log | `build/logs/appium-<port>.log` |
 
-## 🤖 Continuous integration
+## Continuous integration
 
 [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on every push to `master` and on every pull request:
 
@@ -318,7 +319,7 @@ public class MyAppTests extends BaseTest {
 
 The CI runner has no device, so run the device suites locally or against a cloud provider.
 
-## 🧰 Troubleshooting
+## Troubleshooting
 
 <details>
 <summary><b><code>INSTALL_FAILED_DEPRECATED_SDK_VERSION</code> on Android 14+</b></summary>
@@ -356,3 +357,11 @@ A server started by the framework downloads the matching Chromedriver automatica
 yourself, add `--allow-insecure uiautomator2:chromedriver_autodownload`.
 
 </details>
+
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE)
