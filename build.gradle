@@ -21,8 +21,8 @@ ext {
     seleniumVersion = '4.49.0'
     testngVersion = '7.12.0'
     allureVersion = '2.35.5'
-    slf4jVersion = '2.0.17'
-    logbackVersion = '1.5.38'
+    slf4jVersion = '2.0.20'
+    logbackVersion = '1.6.4'
     assertjVersion = '3.27.7'
 }
 
